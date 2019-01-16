@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+	<link rel="stylesheet" href="atc.css">
+	<title>kyranagraphic</title>
+</head>
+<body>
+	<div id="sidebar1">
+		<img src="side.png" alt="" class="side_image">
+		<h1 class="Judul1"><span class="subjudul1">Our</span> Troli</h1>
+		<!-- <h3 class="textkosong">asdfghj</h3> -->
+		<!-- <h1 class="Judul2">Apaan tuh? Masook?</h1> -->
+		<hr class="garis">
+		<p class="Deskripsi1">Silahkan cek kembali barang pesanan anda sebelum melakukan pembayaran.</p>
+		<!-- <a href="View More" class="button1">View More</a> -->
+	</div>
+<!-- 		<p class="Deskripsi1">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+			Modi molestias nesciunt temporibus ex repellendus est fugit! Dolore dicta accusamus
+			sequi id doloremque cupiditate a? Ea sed at nisi nesciunt eveniet. Lorem ipsum dolor
+			sit amet, consectetur adipisicing elit. Modi molestias nesciunt temporibus ex repellendus
+		est fugit! Dolore dicta accusamus sequi id doloremque cupiditata?</p> -->
+		<!-- <a href="View More" class="button1">View More</a> -->
+	</div>
+	<div id="konten_putih">
+		<div class="blok_merah">
+			<img src="Logo.png" alt="" class="Logo">
+			<div class="navbar">
+			</div>
+		</div>
+		<div>
+			<table cellspacing="0"	class="table_all" id="tabel-keranjang">
+				<thead>
+					<tr>
+						<th class="tab0"></th>
+						<th class="tab1">Pesanan</th>
+						<th class="tab2">Harga</th>
+						<th class="tab3">Qty</th>
+						<th class="tab4">Total</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+		<div>
+			<table cellspacing="0"	class="table_all">
+				<tr>
+					<th class="tbot0"></th>
+					<th class="tbot1"><img src="icon_delete.png" alt="" class="icon_delete"></th>
+					<th class="tbot2"></th>
+					<th class="tbot3">Total Bayar</th>
+					<th class="tbot4" id="total">Rp 0</th>
+				</tr>
+			</table>
+		</div>
+		<div>
+			<table cellspacing="0"	class="table_all">
+				<tr>
+					<th class="tbaw0"></th>
+					<th class="tbaw1"></th>
+					<th class="tbaw2"></th>
+					<th class="tbaw3"></th>
+					<th class="tbaw4"><a href="popup.html" class="tbaw4">Bayar</a></th>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<!-- <a href="my_troli.html" class="button2"><img src="Troli.png" alt=""></a> -->
+	<div id="footer">
+		<p class="textfooter">Copyright 2018 © kyranagraphic - All rights reserved.</p>
+		<div class="icon">
+			<a href="ig"><img src="igicon.png" alt=""></a>
+			<a href="tw"><img src="twittericon.png" alt=""></a>
+			<a href="fb"><img src="fbicon.png" alt=""></a>
+			<a href="in"><img src="linkedinicon.png" alt=""></a>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script>
+		function generatetabel() {
+			var total = 0;
+			$('#tabel-keranjang tbody').html('');
+			for ( var i = 0, len = localStorage.length; i < len; ++i ) {
+				var data = JSON.parse(localStorage.getItem( localStorage.key( i ) ));
+				$('#tabel-keranjang tbody').append(`<tr>
+							<td class="td0"><input type="checkbox" name="" value="${ data.nama }" class="checkbox"><br></td>
+							<td class="td1">${ data.nama }</td>
+							<td class="td2">Rp ${ data.harga }</td>
+							<td class="td3"><input type="number" value="${ data.qty }" name="quantity" min="1" max="20" class="qty_troli"></td>
+							<td class="td4">Rp ${ data.harga * data.qty }</td>
+						</tr>`);
+				total += data.harga * data.qty;
+			}
+			$('#total').text('Rp ' + total);
+		}
+
+		// init pertama
+		generatetabel();
+
+		$('.icon_delete').click(function(e) {
+			// cek yg di checkbox
+			$('.checkbox').each(function(index, el) {
+				if($(el).is(':checked')){
+					// remove item
+					localStorage.removeItem($(el).val());
+					// refresh tabel
+					generatetabel();
+				}
+			});
+		});
+	</script>
+</body>
+</html>
