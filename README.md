@@ -2,7 +2,7 @@
 
 ============ Isi Repository ============ </br>
 
-1. Halaman Utama = inde.html </br>
+1. Halaman Utama = index.html </br>
 
 2. Halaman Kedua = my_troly.html </br>
 
